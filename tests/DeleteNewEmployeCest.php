@@ -10,7 +10,7 @@ use Tests\Support\ApiTester;
 
 class DeleteNewEmployeCest
 {
-	//Проверка на удаление сотрудника
+    //Проверка на удаление сотрудника
     public function deleteEmployeById(ApiTester $apiTester): void
     {
         $apiTester->wantToTest('Delete Employe by id');
@@ -19,29 +19,17 @@ class DeleteNewEmployeCest
 
         $apiTester->seeResponseCodeIs(HttpCode::NO_CONTENT);
 
-        $apiTester->sendDelete('remove/27');
+        $apiTester->sendGet('/27');
 
         $apiTester->seeResponseCodeIs(HttpCode::NOT_FOUND);
     }
 
-//    /** @dataProvider incorrectDataProvider */
-//    public function deleteGameWithIncorrectId(ApiTester $apiTester, Example $provider): void
-//    {
-//        $apiTester->wantToTest('Delete game by incorrect id');
-//
-//        $apiTester->sendDelete($provider['incorrectId']);
-//
-//        $apiTester->seeResponseCodeIs(HttpCode::NOT_FOUND);
-//    }
-//
-//    private function incorrectDataProvider(): iterable
-//    {
-//        yield [
-//            'incorrectId' => 'asd'
-//        ];
-//
-//        yield [
-//            'incorrectId' => '-1'
-//        ];
-//    }
+//Проверка DELETE-запроса с несуществующим id сотрудника
+    public function DeleteNonExistentEmployee(ApiTester $apiTester)
+    {
+        $apiTester->sendDELETE('remove/-1');
+
+        $apiTester->seeResponseCodeIs(HttpCode::NOT_FOUND);
+
+    }
 }

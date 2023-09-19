@@ -11,7 +11,7 @@ class GetNewEmployeCest
     public function getEmployeById(ApiTester $apiTester): void
     {
         $apiTester->wantToTest('Get game by id');
-        $s=$apiTester->sendGet('27');
+        $s=$apiTester->sendGet('30');
         print_r($s);
         $apiTester->seeResponseCodeIs(HttpCode::OK);
         $apiTester->seeResponseIsJson();
@@ -30,12 +30,11 @@ class GetNewEmployeCest
     {
         $apiTester->wantToTest('Get non-existent employee');
 
-        $apiTester->sendGet("-2");
+        $apiTester->sendGet("-1");
 
         $apiTester->seeResponseCodeIs(HttpCode::NOT_FOUND);
 
         $apiTester->seeResponseIsJson();
-
     }
 
 
